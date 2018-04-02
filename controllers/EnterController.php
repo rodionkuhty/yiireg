@@ -26,8 +26,6 @@ class EnterController extends Controller
             if($model->validate() && $model->signUp()){
 //                $model->signUp();
                 return $this->goHome();
-            }else{
-
             }
         }
        return $this->render('index', compact('model'));
@@ -35,6 +33,16 @@ class EnterController extends Controller
 
     public function actionLogin()
     {
+        $regModel = new RegForm();
+        $regModel->login = $_POST['RegForm']['login'];
+        $regModel->password = $_POST['RegForm']['password'];
+
+        //$regModel->attributes = Yii::$app->request->post('RegForm');
+        $model = Users::find()->where(['login'=> $regModel->login] )->one();
+        if(empty($model)){
+            $user = new Users();
+            $user->
+        }
         return $this->render('login');
     }
 }
