@@ -10,6 +10,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\db\ActiveRecord;
 use app\models\Users;
+use yii;
 
 
 class RegForm extends Model
@@ -32,7 +33,7 @@ class RegForm extends Model
     {
         $user  = new Users();
         $user->login = $this->login;
-        $user->password = $this->password;
+        $user->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);;
         //Чё то не дотумкал!
         return $user->save();
     }
